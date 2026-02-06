@@ -71,13 +71,39 @@ The final dashboard provides an interactive view of the data:
 
 ---
 
-## 🚀 How to Run
-1.  **Database Setup:** Run the provided `SQL_Schema_Script.sql` to create the database tables.
-2.  **ETL Execution:**
-    * Open the solution file (`.sln`) in Visual Studio 2019+ with SSDT installed.
-    * Configure the **Connection Managers** to point to your local SQL Server instance.
-    * Run the package `Main.dtsx`.
-3.  **Visualization:** Open the `Dashboard.pbix` file and refresh the data source to point to your local database.
+### 📊 Data Sources
+
+This project integrates two primary datasets sourced from **Kaggle**, covering over a century of aviation history to provide a robust foundation for safety analysis:
+
+1. **Aviation Accident Database & Synopses**: Contains detailed data from the National Transportation Safety Board (NTSB) regarding civil aviation accidents and selected incidents within the United States and international waters.
+* [View Dataset on Kaggle](https://www.kaggle.com/datasets/khsamaha/aviation-accident-database-synopses)
+
+
+2. **Airplane Crashes and Fatalities Since 1908**: A comprehensive historical record of commercial, military, and private aircraft crashes worldwide.
+* [View Dataset on Kaggle](https://www.kaggle.com/datasets/saurograndi/airplane-crashes-since-1908)
+
+
+
+---
+
+### 📂 Project Structure
+
+The repository is organized into modular SSIS packages to ensure a maintainable and scalable ETL pipeline. Each package handles a specific part of the **Star Schema** architecture.
+
+#### **ETL Logic (SSIS Packages)**
+
+* **`DimensionDate.dtsx`**: Automates the creation of the temporal dimension. It extracts date attributes and transforms them into hierarchies (Year, Month, Day) to enable time-series analysis in Power BI.
+* **`DimensionFlight.dtsx`**: Processes aircraft-specific data. It handles the cleaning of `Operator` names, `Aircraft Types`, and standardizes `Flight Phases` (e.g., Takeoff, Landing).
+* **`DimensionDamages.dtsx`**: Implements the core business logic. This package classifies the severity of an incident as **"Grave"** or **"Leger"** by evaluating casualty counts and the physical state of the aircraft.
+* **`TableDeFaits_Accidents.dtsx`**: The main orchestration package. It performs **Lookup Transformations** against the Dimension tables to resolve surrogate keys and loads the final validated data into the central Fact table.
+
+#### **Project Configuration**
+
+* **`Integration Services Project4.dtproj`**: The master Visual Studio project file that manages the metadata and deployment settings for the SSIS solution.
+* **`Project.params`**: Contains project-level parameters used to manage environment variables (such as file paths) without hardcoding values.
+* **`*.conmgr` file**: Connection manager that define the source (Flat Files/CSV) and destination (SQL Server OLE DB) endpoints for the data flow.
+
+---
 
 ## 👤 Author
 **[Aymane Ziane]**
