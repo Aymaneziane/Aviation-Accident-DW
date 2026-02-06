@@ -1,0 +1,1262 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/29/2022 4:22:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AYMANE-MSI"
+  DTS:CreatorName="AYMANE-MSI\Administrator"
+  DTS:DTSID="{59F40BD9-1061-4713-8CE7-4D7BE9553050}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="14348"
+  DTS:ObjectName="DimensionDamages"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{24A8C541-1300-43DB-B5BC-6DD76C72D117}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.AirplaneCrashesDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8C8ABDF9-EBCA-4A36-8907-A31C57BDD24F}"
+      DTS:ObjectName="localhost.AirplaneCrashesDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=AirplaneCrashesDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package3-{8C8ABDF9-EBCA-4A36-8907-A31C57BDD24F}localhost.AirplaneCrashesDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.AirplaneCrashesDW 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{01978E58-1AF8-48ED-9BA2-60437D17F793}"
+      DTS:ObjectName="localhost.AirplaneCrashesDW 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=AirplaneCrashesDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package3-{01978E58-1AF8-48ED-9BA2-60437D17F793}localhost.AirplaneCrashesDW 1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DIM Damage"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BD56CB72-7516-4A9A-8CFA-4508FDA34986}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DIM Damage"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DIM Damage\Dim Damage Columns"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Dim Damage Columns"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input].Columns[Aircraft Damage]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Aircraft Damage"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Damage]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input].Columns[Event_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Event_Date"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input].Columns[Total_Fatal_injuries1]"
+                      cachedDataType="i4"
+                      cachedName="Total_Fatal_injuries1"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input].Columns[Total_Uninjured1]"
+                      cachedDataType="i4"
+                      cachedName="Total_Uninjured1"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Type_Accident]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Type_Accident]"
+                      name="Type_Accident"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]} &gt; 0 ? "Grave" : #{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]} == 0 ? "Leger" : "Normal"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Total_Fatal_injuries1 &gt; 0 ? "Grave" : Total_Fatal_injuries1 == 0 ? "Leger" : "Normal"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Deces]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Deces]"
+                      name="Nombre_Deces"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]}) ? 0 : #{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(Total_Fatal_injuries1) ? 0 : Total_Fatal_injuries1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Survivants]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Survivants]"
+                      name="Nombre_Survivants"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]}) ? 0 : #{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(Total_Uninjured1) ? 0 : Total_Uninjured1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Dommages_Avion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Dommages_Avion]"
+                      name="Dommages_Avion"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Damage]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[Aircraft Damage]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[FullDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[FullDate]"
+                      name="FullDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Event_Date</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DIM Damage\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Damage]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DIM Damage\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.AirplaneCrashesDW 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.AirplaneCrashesDW 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Type_Accident]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Type_Accident"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type_Accident]"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Type_Accident]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Dommages_Avion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Dommages_Avion"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dommages_Avion]"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Dommages_Avion]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FullDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="FullDate"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullDate]"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[FullDate]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Nombre_Deces]"
+                      cachedDataType="i4"
+                      cachedName="Nombre_Deces"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nombre_Deces]"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Nombre_Deces]" />
+                    <inputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Nombre_Survivants]"
+                      cachedDataType="i4"
+                      cachedName="Nombre_Survivants"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nombre_Survivants]"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Nombre_Survivants]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationKey]"
+                      dataType="i4"
+                      name="RegistrationKey" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type_Accident]"
+                      dataType="wstr"
+                      length="50"
+                      name="Type_Accident" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nombre_Deces]"
+                      dataType="i4"
+                      name="Nombre_Deces" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Nombre_Survivants]"
+                      dataType="i4"
+                      name="Nombre_Survivants" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Dommages_Avion]"
+                      dataType="wstr"
+                      length="50"
+                      name="Dommages_Avion" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullDate]"
+                      dataType="dbDate"
+                      name="FullDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DIM Damage\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DIM Damage\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [Injury Severity], [Aircraft Damage], [Total Serious Injuries], [Total Minor Injuries], Event_Date, [Event Date], Total_Fatal_injuries1 , Total_Uninjured1 
+FROM     AirplaneCrashes</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DIM Damage\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{0CC3C61A-421E-485A-8356-7A65721CCFF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.DatabaseProject]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Injury Severity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Injury Severity]"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Injury Severity]"
+                      name="Injury Severity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Damage]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Aircraft Damage]"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Damage]"
+                      name="Aircraft Damage"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Serious Injuries]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total Serious Injuries]"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Serious Injuries]"
+                      name="Total Serious Injuries"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Minor Injuries]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total Minor Injuries]"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Minor Injuries]"
+                      name="Total Minor Injuries"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Event_Date]"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]"
+                      name="Event_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event Date]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Event Date]"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event Date]"
+                      name="Event Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total_Fatal_injuries1]"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]"
+                      name="Total_Fatal_injuries1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total_Uninjured1]"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]"
+                      name="Total_Uninjured1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Injury Severity]"
+                      dataType="wstr"
+                      length="255"
+                      name="Injury Severity" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Aircraft Damage]"
+                      dataType="wstr"
+                      length="255"
+                      name="Aircraft Damage" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total Serious Injuries]"
+                      dataType="wstr"
+                      length="255"
+                      name="Total Serious Injuries" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total Minor Injuries]"
+                      dataType="wstr"
+                      length="255"
+                      name="Total Minor Injuries" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      name="Event_Date" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Event Date]"
+                      dataType="wstr"
+                      length="255"
+                      name="Event Date" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total_Fatal_injuries1]"
+                      dataType="i4"
+                      name="Total_Fatal_injuries1" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Total_Uninjured1]"
+                      dataType="i4"
+                      name="Total_Uninjured1" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Injury Severity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Injury Severity]"
+                      name="Injury Severity" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Aircraft Damage]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Aircraft Damage]"
+                      name="Aircraft Damage" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total Serious Injuries]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total Serious Injuries]"
+                      name="Total Serious Injuries" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total Minor Injuries]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total Minor Injuries]"
+                      name="Total Minor Injuries" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Event_Date]"
+                      name="Event_Date" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Event Date]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Event Date]"
+                      name="Event Date" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total_Fatal_injuries1]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total_Fatal_injuries1]"
+                      name="Total_Fatal_injuries1" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total_Uninjured1]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Total_Uninjured1]"
+                      name="Total_Uninjured1" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DIM Damage\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DIM Damage\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Injury Severity]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Injury Severity"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Injury Severity]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Aircraft Damage]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Aircraft Damage"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Damage]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Total Serious Injuries]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Total Serious Injuries"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Serious Injuries]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Total Minor Injuries]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Total Minor Injuries"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Minor Injuries]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Event_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Event_Date"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Event Date]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Event Date"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event Date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Total_Fatal_injuries1]"
+                      cachedDataType="i4"
+                      cachedName="Total_Fatal_injuries1"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Total_Uninjured1]"
+                      cachedDataType="i4"
+                      cachedName="Total_Uninjured1"
+                      lineageId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Type_Accident]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Type_Accident"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Type_Accident]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Nombre_Deces]"
+                      cachedDataType="i4"
+                      cachedName="Nombre_Deces"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Deces]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Nombre_Survivants]"
+                      cachedDataType="i4"
+                      cachedName="Nombre_Survivants"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Survivants]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[Dommages_Avion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Dommages_Avion"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Dommages_Avion]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Damage\Sort.Inputs[Sort Input].Columns[FullDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="FullDate"
+                      lineageId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[FullDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DIM Damage\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Injury Severity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Injury Severity]"
+                      name="Injury Severity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Injury Severity]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Aircraft Damage]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Aircraft Damage]"
+                      name="Aircraft Damage">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Damage]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total Serious Injuries]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total Serious Injuries]"
+                      name="Total Serious Injuries">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Serious Injuries]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total Minor Injuries]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total Minor Injuries]"
+                      name="Total Minor Injuries">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total Minor Injuries]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Event_Date]"
+                      name="Event_Date"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Event Date]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Event Date]"
+                      name="Event Date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event Date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total_Fatal_injuries1]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total_Fatal_injuries1]"
+                      name="Total_Fatal_injuries1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Fatal_injuries1]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total_Uninjured1]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Total_Uninjured1]"
+                      name="Total_Uninjured1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output].Columns[Total_Uninjured1]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Type_Accident]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Type_Accident]"
+                      name="Type_Accident">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Type_Accident]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Nombre_Deces]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Nombre_Deces]"
+                      name="Nombre_Deces">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Deces]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Nombre_Survivants]"
+                      dataType="i4"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Nombre_Survivants]"
+                      name="Nombre_Survivants">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Nombre_Survivants]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Dommages_Avion]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[Dommages_Avion]"
+                      name="Dommages_Avion">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[Dommages_Avion]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[FullDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DIM Damage\Sort.Outputs[Sort Output].Columns[FullDate]"
+                      name="FullDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output].Columns[FullDate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DIM Damage.Paths[Derived Column Output]"
+              endId="Package\DIM Damage\Sort.Inputs[Sort Input]"
+              name="Derived Column Output"
+              startId="Package\DIM Damage\Dim Damage Columns.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DIM Damage.Paths[OLE DB Source Output]"
+              endId="Package\DIM Damage\Dim Damage Columns.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DIM Damage\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DIM Damage.Paths[Sort Output]"
+              endId="Package\DIM Damage\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Sort Output"
+              startId="Package\DIM Damage\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\DIM Damage"
+          TopLeft="65.0000011069434,39.0000005469603" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DIM Damage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DIM Damage\OLE DB Destination"
+          TopLeft="428.571435869957,199.588238093267" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DIM Damage\OLE DB Source"
+          TopLeft="106.428573241039,68.8235303769887" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\DIM Damage\Sort"
+          TopLeft="445.714293304755,69.035295018523" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\DIM Damage\Dim Damage Columns"
+          TopLeft="134.285716572586,206.470591130966" />
+        <EdgeLayout
+          Id="Package\DIM Damage.Paths[Sort Output]"
+          TopLeft="511.609531254023,110.635295018523">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88.9529430747444"
+              Start="0,0"
+              End="0,81.4529430747444">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.4529430747444" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DIM Damage.Paths[OLE DB Source Output]"
+          TopLeft="181.228573241039,110.423530376989">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.457143331547,96.0470607539773"
+              Start="0,0"
+              End="15.457143331547,88.5470607539773">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.1292906822358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53.1292906822358"
+                    Point2="0,57.1292906822358"
+                    Point3="4,57.1292906822358" />
+                  <mssgle:LineSegment
+                    End="11.457143331547,57.1292906822358" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.457143331547,57.1292906822358"
+                    Point2="15.457143331547,57.1292906822358"
+                    Point3="15.457143331547,61.1292906822358" />
+                  <mssgle:LineSegment
+                    End="15.457143331547,88.5470607539773" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DIM Damage.Paths[Derived Column Output]"
+          TopLeft="255.085716572586,206.470591130966">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="224.495243398836,-95.835296112443"
+              Start="0,0"
+              End="224.495243398836,-88.335296112443">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-43.4728190282664" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-43.4728190282664"
+                    Point2="0,-47.4728190282664"
+                    Point3="4,-47.4728190282664" />
+                  <mssgle:LineSegment
+                    End="220.495243398836,-47.4728190282664" />
+                  <mssgle:CubicBezierSegment
+                    Point1="220.495243398836,-47.4728190282664"
+                    Point2="224.495243398836,-47.4728190282664"
+                    Point3="224.495243398836,-51.4728190282664" />
+                  <mssgle:LineSegment
+                    End="224.495243398836,-88.335296112443" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DIM Damage\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DIM Damage\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

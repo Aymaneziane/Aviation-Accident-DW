@@ -1,0 +1,1124 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/3/2022 6:38:43 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AYMANE-MSI"
+  DTS:CreatorName="AYMANE-MSI\Administrator"
+  DTS:DTSID="{A2050A44-2281-408C-9BF5-88C494DB011B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="14348"
+  DTS:ObjectName="DimensionFlight"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{D9079E21-71DE-4F6A-B073-3E76E426B9DB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.AirplaneCrashesDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6B2D8ABD-2146-4942-A925-705D99BA2386}"
+      DTS:ObjectName="localhost.AirplaneCrashesDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=AirplaneCrashesDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package4-{6B2D8ABD-2146-4942-A925-705D99BA2386}localhost.AirplaneCrashesDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DIM Flight"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9D46E241-12BE-49F3-8AA2-BF925E06694D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DIM Flight"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DIM Flight\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input].Columns[Make]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Make"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input].Columns[Aircraft Category]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Aircraft Category"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input].Columns[Airport Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Airport Name"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Airport Name]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input].Columns[Broad Phase of Flight]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Broad Phase of Flight"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input].Columns[Event_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Event_Date"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Operateur]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Operateur]"
+                      name="Operateur"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]} == "  " ? "Inconnu" : #{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]} == " UNKNOWN " ? "Inconnu" : [ISNULL](#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]}) ? "Inconnu" : #{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Make == "  " ? "Inconnu" : Make == " UNKNOWN " ? "Inconnu" : ISNULL(Make) ? "Inconnu" : Make</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Type_Avion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Type_Avion]"
+                      name="Type_Avion"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]} == "  " ? "Inconnu" : #{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]} == " Unknown " ? "Inconnu" : [ISNULL](#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]}) ? "Inconnu" : #{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[Aircraft Category] == "  " ? "Inconnu" : [Aircraft Category] == " Unknown " ? "Inconnu" : ISNULL([Aircraft Category]) ? "Inconnu" : [Aircraft Category]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Aeroport]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Aeroport]"
+                      name="Aeroport"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Airport Name]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[Airport Name]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Phase_vol]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Phase_vol]"
+                      name="Phase_vol"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]} == "  " ? "Inconnu" : #{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]} == " UNKNOWN " ? "Inconnu" : [ISNULL](#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]}) ? "Inconnu" : #{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[Broad Phase of Flight] == "  " ? "Inconnu" : [Broad Phase of Flight] == " UNKNOWN " ? "Inconnu" : ISNULL([Broad Phase of Flight]) ? "Inconnu" : [Broad Phase of Flight]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[fullDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[fullDate]"
+                      name="fullDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Event_Date</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DIM Flight\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DIM Flight\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Flight]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DIM Flight\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.AirplaneCrashesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.AirplaneCrashesDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Operateur]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Operateur"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Operateur]"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Operateur]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Type_Avion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Type_Avion"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type_Avion]"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Type_Avion]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Phase_vol]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Phase_vol"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phase_vol]"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Phase_vol]" />
+                    <inputColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Aeroport]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Aeroport"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Aeroport_Depart]"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Aeroport]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Vol_Key]"
+                      dataType="i4"
+                      name="Vol_Key" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Operateur]"
+                      dataType="wstr"
+                      length="255"
+                      name="Operateur" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type_Avion]"
+                      dataType="wstr"
+                      length="255"
+                      name="Type_Avion" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Aeroport_Depart]"
+                      dataType="wstr"
+                      length="255"
+                      name="Aeroport_Depart" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phase_vol]"
+                      dataType="wstr"
+                      length="255"
+                      name="Phase_vol" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DIM Flight\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DIM Flight\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DIM Flight\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DIM Flight\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT Event_Date, Make, [Aircraft Category], [Airport Name], [Broad Phase of Flight]
+FROM     AirplaneCrashes</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DIM Flight\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{0CC3C61A-421E-485A-8356-7A65721CCFF6}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.DatabaseProject]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Event_Date]"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]"
+                      name="Event_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Make]"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]"
+                      name="Make"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Aircraft Category]"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]"
+                      name="Aircraft Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Airport Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Airport Name]"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Airport Name]"
+                      name="Airport Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Broad Phase of Flight]"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]"
+                      name="Broad Phase of Flight"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      name="Event_Date" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Make]"
+                      dataType="wstr"
+                      length="255"
+                      name="Make" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Aircraft Category]"
+                      dataType="wstr"
+                      length="255"
+                      name="Aircraft Category" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Airport Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Airport Name" />
+                    <externalMetadataColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Broad Phase of Flight]"
+                      dataType="wstr"
+                      length="255"
+                      name="Broad Phase of Flight" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Event_Date]"
+                      name="Event_Date" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Make]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Make]"
+                      name="Make" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Aircraft Category]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Aircraft Category]"
+                      name="Aircraft Category" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Airport Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Airport Name]"
+                      name="Airport Name" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Broad Phase of Flight]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Broad Phase of Flight]"
+                      name="Broad Phase of Flight" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DIM Flight\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DIM Flight\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Event_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Event_Date"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Make]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Make"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Aircraft Category]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Aircraft Category"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Airport Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Airport Name"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Airport Name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Broad Phase of Flight]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Broad Phase of Flight"
+                      lineageId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Operateur]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Operateur"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Operateur]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Type_Avion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Type_Avion"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Type_Avion]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Aeroport]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Aeroport"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Aeroport]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[Phase_vol]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Phase_vol"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Phase_vol]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DIM Flight\Sort.Inputs[Sort Input].Columns[fullDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fullDate"
+                      lineageId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[fullDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DIM Flight\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Event_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Event_Date]"
+                      name="Event_Date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Event_Date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Make]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Make]"
+                      name="Make">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Make]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Aircraft Category]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Aircraft Category]"
+                      name="Aircraft Category">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Aircraft Category]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Airport Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Airport Name]"
+                      name="Airport Name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Airport Name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Broad Phase of Flight]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Broad Phase of Flight]"
+                      name="Broad Phase of Flight">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output].Columns[Broad Phase of Flight]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Operateur]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Operateur]"
+                      name="Operateur">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Operateur]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Type_Avion]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Type_Avion]"
+                      name="Type_Avion">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Type_Avion]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Aeroport]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Aeroport]"
+                      name="Aeroport">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Aeroport]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Phase_vol]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[Phase_vol]"
+                      name="Phase_vol">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[Phase_vol]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[fullDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DIM Flight\Sort.Outputs[Sort Output].Columns[fullDate]"
+                      name="fullDate"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DIM Flight\Derived Column.Outputs[Derived Column Output].Columns[fullDate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DIM Flight.Paths[Derived Column Output]"
+              endId="Package\DIM Flight\Sort.Inputs[Sort Input]"
+              name="Derived Column Output"
+              startId="Package\DIM Flight\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DIM Flight.Paths[OLE DB Source Output]"
+              endId="Package\DIM Flight\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DIM Flight\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DIM Flight.Paths[Sort Output]"
+              endId="Package\DIM Flight\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Sort Output"
+              startId="Package\DIM Flight\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="127.2,41.6"
+          Id="Package\DIM Flight"
+          TopLeft="155.000002639634,58.1176478739016" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DIM Flight">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DIM Flight\OLE DB Source"
+          TopLeft="321.428576902468,28.2941180438732" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\DIM Flight\Derived Column"
+          TopLeft="206.428574944029,163.635295930123" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\DIM Flight\Sort"
+          TopLeft="456.428579201504,245.894120960994" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\DIM Flight\OLE DB Destination"
+          TopLeft="495.000008429799,35.1764710815719" />
+        <EdgeLayout
+          Id="Package\DIM Flight.Paths[Derived Column Output]"
+          TopLeft="282.828574944029,205.235295930123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="207.466670924142,40.6588250308711"
+              Start="0,0"
+              End="207.466670924142,33.1588250308711">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.0018225182239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.0018225182239"
+                    Point2="0,24.0018225182239"
+                    Point3="4,24.0018225182239" />
+                  <mssgle:LineSegment
+                    End="203.466670924142,24.0018225182239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="203.466670924142,24.0018225182239"
+                    Point2="207.466670924142,24.0018225182239"
+                    Point3="207.466670924142,28.0018225182239" />
+                  <mssgle:LineSegment
+                    End="207.466670924142,33.1588250308711" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DIM Flight.Paths[Sort Output]"
+          TopLeft="520.161912534837,245.894120960994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60.0380958949622,-169.117649879422"
+              Start="0,0"
+              End="60.0380958949622,-161.617649879422">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-65.2836823699569" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-65.2836823699569"
+                    Point2="0,-69.2836823699569"
+                    Point3="4,-69.2836823699569" />
+                  <mssgle:LineSegment
+                    End="56.0380958949622,-69.2836823699569" />
+                  <mssgle:CubicBezierSegment
+                    Point1="56.0380958949622,-69.2836823699569"
+                    Point2="60.0380958949622,-69.2836823699569"
+                    Point3="60.0380958949622,-73.2836823699569" />
+                  <mssgle:LineSegment
+                    End="60.0380958949622,-161.617649879422" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DIM Flight.Paths[OLE DB Source Output]"
+          TopLeft="396.228576902468,69.8941180438732">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-113.400001958439,93.7411778862498"
+              Start="0,0"
+              End="-113.400001958439,86.2411778862498">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8705889431249" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42.8705889431249"
+                    Point2="0,46.8705889431249"
+                    Point3="-4,46.8705889431249" />
+                  <mssgle:LineSegment
+                    End="-109.400001958439,46.8705889431249" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-109.400001958439,46.8705889431249"
+                    Point2="-113.400001958439,46.8705889431249"
+                    Point3="-113.400001958439,50.8705889431249" />
+                  <mssgle:LineSegment
+                    End="-113.400001958439,86.2411778862498" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DIM Flight\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DIM Flight\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
